@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Role Selection</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    .role-buttons button {
-      margin: 10px;
-      padding: 15px 30px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Numeracy Level Portal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to the Portal</h1>
-  <p>Please select your role to continue:</p>
-  <div class="role-buttons">
-    <button id="studentBtn">Student</button>
-    <button id="teacherBtn">Teacher</button>
-    <button id="visitorBtn">Visitor</button>
-  </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo1.png" alt="Logo 1" class="logo">
+                <img src="logo2.png" alt="Logo 2" class="logo">
+                <img src="logo3.png" alt="Logo 3" class="logo">
+                <img src="logo4.png" alt="Logo 4" class="logo">
+            </div>
+            <h1 class="school-name">Antipolo City National Science And Technology High School</h1>
+        </div>
 
-  <script>
-    document.getElementById('studentBtn').addEventListener('click', () => {
-      localStorage.setItem('userRole', 'student');
-      window.location.href = 'student_lrn.html'; // Redirect to LRN input page
-    });
-    document.getElementById('teacherBtn').addEventListener('click', () => {
-      localStorage.setItem('userRole', 'teacher');
-      // Redirect to teacher page (create as needed)
-      window.location.href = 'teacher.html';
-    });
-    document.getElementById('visitorBtn').addEventListener('click', () => {
-      localStorage.setItem('userRole', 'visitor');
-      // Redirect to visitor page or main
-      window.location.href = 'index.html'; // or another page
-    });
-  </script>
+        <h2>Welcome to the Numeracy Level Portal</h2>
+        
+        <div class="role-buttons">
+            <button onclick="redirectTo('student')">I'm a Student</button>
+            <button onclick="redirectTo('teacher')">I'm a Teacher</button>
+            <button onclick="redirectTo('visitor')">I'm a Visitor</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectTo(role) {
+            switch (role) {
+                case 'student':
+                    window.location.href = 'lrn.html'; // or wherever your student LRN page is
+                    break;
+                case 'teacher':
+                    window.location.href = 'teacher.html';
+                    break;
+                case 'visitor':
+                    window.location.href = 'visitor.html';
+                    break;
+                default:
+                    alert("Unknown role selected.");
+            }
+        }
+    </script>
 </body>
 </html>
