@@ -153,3 +153,36 @@ button:hover {
 .role-buttons button:hover {
     background-color: #388e3c;
 }
+
+.student-box {
+    background-color: #c8e6c9;
+    border: 2px solid #4caf50;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    color: #1b5e20;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+    color: #2e7d32;
+}
+
+select {
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
+}
+
