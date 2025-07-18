@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Numeracy Assessment Results</title>
+  <link rel="stylesheet" href="style1.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="logo4.png" alt="School Logo" />
+    </div>
+
+    <div class="certificate-header">
+      <h4>ANTIPOLO CITY NATIONAL SCIENCE AND TECHNOLOGY HIGH SCHOOL</h4>
+    </div>
+
+    <h1 class="certificate-title">Certificate of Recognition</h1>
+
+    <p class="presented-to">is presented to</p>
+    <h2 id="studentName">(Student Name)</h2>
+
+    <p class="description">
+      for being classified as a/an 
+      <strong><span id="numeracyStatus">NUMERACY LEVEL</span></strong><br>
+      during the <strong><span id="assessmentPeriod">ASSESSMENT PERIOD</span></strong> of the 
+      <strong><span id="schoolYear">SCHOOL YEAR</span></strong> in 
+      <strong><span id="gradeLevel">GRADE</span></strong> at 
+      Antipolo City National Science and Technology High School.
+    </p>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    async function showResult() {
+      await loadCSV();
+
+      const lrn = localStorage.getItem('studentLRN');
+      const year = localStorage.getItem('selectedYear');
+      const grade = localStorage.getItem('selectedGrade');
+      const period = localStorage.getItem('selectedPeriod');
+
+      const student = studentData.find(s =>
+        s.LRN === lrn &&
+        s.Grade === grade &&
+        s.Assessment === period &&
+        s.SchoolYear === year
+      );
+
+      document.getElementById('studentName').textContent = student?.Name || 'Student not found';
+      document.getElementById('numeracyStatus').textContent = student?.Numeracy || 'N/A';
+      document.getElementById('assessmentPeriod').textContent = period === 'BOSY' ? 'Beginning of School Year' : 'End of School Year';
+      document.getElementById('schoolYear').textContent = year;
+      document.getElementById('gradeLevel').textContent = grade;
+    }
+
+    showResult();
+  </script>
+</body>
+</html>
