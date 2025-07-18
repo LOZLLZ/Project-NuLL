@@ -129,3 +129,27 @@ button:hover {
         padding: 1rem;
     }
 }
+
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.role-buttons button {
+    padding: 1.2rem;
+    font-size: 1.4rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.role-buttons button:hover {
+    background-color: #388e3c;
+}
