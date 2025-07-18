@@ -1,0 +1,131 @@
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+    color: #2e7d32; /* Dark green text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Adjust this value as needed */
+    padding: 4rem; /* Space inside the container */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 2rem; /* Space outside the container */
+    box-sizing: border-box;
+}
+
+/* Header styling */
+.header {
+    margin-bottom: 3rem;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.school-name {
+    font-size: 2.2rem;
+    color: #1b5e20;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Headings */
+h1 {
+    color: #1b5e20;
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #1b5e20;
+    margin-bottom: 2rem;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+input {
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
+    text-align: center;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #388e3c;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .logo {
+        width: 80px;
+    }
+
+    .school-name {
+        font-size: 1.8rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        padding: 2rem;
+        margin: 1rem;
+    }
+
+    form {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    input, button {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+}
