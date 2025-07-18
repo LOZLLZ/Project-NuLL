@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Numeracy Assessment Results</title>
   <link rel="stylesheet" href="style1.css" />
+  <style>
+    .back-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #388e3c;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -31,6 +50,8 @@
     </p>
   </div>
 
+  <button class="back-button" onclick="goBack()">Go Back</button>
+
   <script src="script.js"></script>
   <script>
     async function showResult() {
@@ -53,6 +74,10 @@
       document.getElementById('assessmentPeriod').textContent = period === 'BOSY' ? 'Beginning of School Year' : 'End of School Year';
       document.getElementById('schoolYear').textContent = year;
       document.getElementById('gradeLevel').textContent = grade;
+    }
+
+    function goBack() {
+      window.location.href = 'student.html';
     }
 
     showResult();
