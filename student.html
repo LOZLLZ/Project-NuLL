@@ -1,84 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Dashboard | Numeracy Portal</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Student Selection</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .student-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    select, button {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .student-name {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo-container">
-        <img src="logo1.png" alt="Logo 1" class="logo">
-        <img src="logo2.png" alt="Logo 2" class="logo">
-        <img src="logo3.png" alt="Logo 3" class="logo">
-        <img src="logo4.png" alt="Logo 4" class="logo">
-      </div>
-      <h1 class="school-name">Antipolo City National Science And Technology High School</h1>
-    </div>
+  <div class="student-box">
+    <div class="student-name" id="studentName">Loading name...</div>
 
-    <div class="student-box">
-      <h2>Welcome, <span id="studentName">Loading...</span></h2>
-    </div>
+    <select id="schoolYear">
+      <option value="">Select School Year</option>
+      <option value="2024-2025">2024-2025</option>
+      <option value="2023-2024">2023-2024</option>
+    </select>
 
-    <form id="studentSelectionForm">
-      <h2>Please fill out the following:</h2>
+    <select id="gradeLevel">
+      <option value="">Select Grade Level</option>
+      <option value="7">Grade 7</option>
+      <option value="8">Grade 8</option>
+      <option value="9">Grade 9</option>
+      <option value="10">Grade 10</option>
+    </select>
 
-      <label for="schoolYear">School Year:</label>
-      <select id="schoolYear" required>
-        <option value="">-- Select School Year --</option>
-        <option value="2023-2024">2023–2024</option>
-        <option value="2024-2025">2024–2025</option>
-        <option value="2025-2026">2025–2026</option>
-      </select>
+    <select id="assessmentType">
+      <option value="">Select Assessment</option>
+      <option value="BOSY">BOSY</option>
+      <option value="EOSY">EOSY</option>
+    </select>
 
-      <label for="gradeLevel">Grade Level:</label>
-      <select id="gradeLevel" required>
-        <option value="">-- Select Grade Level --</option>
-        <option value="Grade 7">Grade 7</option>
-        <option value="Grade 8">Grade 8</option>
-        <option value="Grade 9">Grade 9</option>
-        <option value="Grade 10">Grade 10</option>
-        <option value="Grade 11">Grade 11</option>
-        <option value="Grade 12">Grade 12</option>
-      </select>
-
-      <label for="assessmentPeriod">Assessment Period:</label>
-      <select id="assessmentPeriod" required>
-        <option value="">-- Select Period --</option>
-        <option value="BOSY">BOSY (Beginning of School Year)</option>
-        <option value="EOSY">EOSY (End of School Year)</option>
-      </select>
-
-      <button type="submit">View Result</button>
-    </form>
+    <button onclick="submitStudentForm()">Submit</button>
   </div>
 
-  <script src="script.js"></script>
   <script>
-    // Load CSV and student name from LRN
-    displayStudentName();
-
-    // Handle form submission
-    document.getElementById('studentSelectionForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const year = document.getElementById('schoolYear').value;
-      const grade = document.getElementById('gradeLevel').value;
-      const period = document.getElementById('assessmentPeriod').value;
-
-      if (!year || !grade || !period) {
-        alert("Please complete all fields.");
-        return;
-      }
-
-      localStorage.setItem('selectedYear', year);
-      localStorage.setItem('selectedGrade', grade);
-      localStorage.setItem('selectedPeriod', period);
-
-      window.location.href = 'results.html';
-    });
+    document.getElementById("studentName").textContent =
+      localStorage.getItem("studentName") || "Unknown Student";
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
