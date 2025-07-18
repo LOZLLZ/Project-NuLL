@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to the Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the Student Portal</h1>
+    <p>Please select your role to continue:</p>
+    <div class="role-buttons">
+      <button id="studentBtn">Student</button>
+      <button id="teacherBtn">Teacher</button>
+      <button id="visitorBtn">Visitor</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('studentBtn').addEventListener('click', () => {
+      localStorage.setItem('userRole', 'student');
+      window.location.href = 'index.html'; // Or redirect to student-specific page
+    });
+
+    document.getElementById('teacherBtn').addEventListener('click', () => {
+      localStorage.setItem('userRole', 'teacher');
+      // Redirect to teacher page or show teacher-specific content
+      alert('Teacher role selected. Redirecting to teacher page...');
+      window.location.href = 'teacher.html'; // Create this page as needed
+    });
+
+    document.getElementById('visitorBtn').addEventListener('click', () => {
+      localStorage.setItem('userRole', 'visitor');
+      // Redirect to visitor info or main page
+      alert('Visitor role selected. Proceeding as visitor...');
+      window.location.href = 'index.html'; // Or another page
+    });
+  </script>
+</body>
+</html>
