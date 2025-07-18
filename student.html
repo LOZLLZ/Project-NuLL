@@ -1,71 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Student Selection</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #eef2f3;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .student-box {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 500px;
-      margin: 0 auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    select, button {
-      padding: 10px;
-      width: 80%;
-      margin: 10px 0;
-      font-size: 16px;
-    }
-
-    .student-name {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Student Info</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="student-box">
-    <div class="student-name" id="studentName">Loading name...</div>
+  <div class="container">
+    <h2>Welcome, <span id="studentName">Loading...</span></h2>
 
-    <select id="schoolYear">
-      <option value="">Select School Year</option>
-      <option value="2024-2025">2024-2025</option>
-      <option value="2023-2024">2023-2024</option>
-    </select>
+    <form id="studentForm">
+      <label for="schoolYear">School Year:</label>
+      <select id="schoolYear" required>
+        <option value="">Select Year</option>
+        <option value="2024-2025">2024-2025</option>
+        <option value="2023-2024">2023-2024</option>
+      </select>
 
-    <select id="gradeLevel">
-      <option value="">Select Grade Level</option>
-      <option value="7">Grade 7</option>
-      <option value="8">Grade 8</option>
-      <option value="9">Grade 9</option>
-      <option value="10">Grade 10</option>
-    </select>
+      <label for="gradeLevel">Grade Level:</label>
+      <select id="gradeLevel" required>
+        <option value="">Select Grade</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
 
-    <select id="assessmentType">
-      <option value="">Select Assessment</option>
-      <option value="BOSY">BOSY</option>
-      <option value="EOSY">EOSY</option>
-    </select>
+      <label for="period">BOSY or EOSY:</label>
+      <select id="period" required>
+        <option value="">Select Period</option>
+        <option value="BOSY">BOSY</option>
+        <option value="EOSY">EOSY</option>
+      </select>
 
-    <button onclick="submitStudentForm()">Submit</button>
+      <button type="submit">View Result</button>
+    </form>
   </div>
 
-  <script>
-    document.getElementById("studentName").textContent =
-      localStorage.getItem("studentName") || "Unknown Student";
-  </script>
   <script src="script.js"></script>
+  <script>
+    async function loadAndShowName() {
+      await loadCSV();
+      const lrn = localStorage.getItem('studentLRN');
+      const student = studentData.find(row => row.LRN === lrn);
+      document.getElementById('studentName').textContent = student ? student.Name : "Not Found";
+    }
+
+    loadAndShowName();
+
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('selectedYear', document.getElementById('schoolYear').value);
+      localStorage.setItem('selectedGrade', document.getElementById('gradeLevel').value);
+      localStorage.setItem('selectedPeriod', document.getElementById('period').value);
+      window.location.href = "results.html";
+    });
+  </script>
 </body>
 </html>
