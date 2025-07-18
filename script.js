@@ -1,51 +1,50 @@
 let studentData = [];
 
 async function loadCSV() {
-  const response = await fetch('data.csv');
-  const data = await response.text();
-  const lines = data.trim().split('\n');
-  const headers = lines[0].split(',');
+  if (studentData.length > 0) return; // Already loaded
+  try {
+    const response = await fetch('data.csv');
+    const text = await response.text();
+    const rows = text.trim().split('\n').map(r => r.split(','));
 
-  studentData = lines.slice(1).map(line => {
-    const values = line.split(',');
-    const row = {};
-    headers.forEach((header, index) => {
-      row[header.trim()] = values[index].trim();
+    const headers = rows[0];
+    studentData = rows.slice(1).map(row => {
+      let obj = {};
+      row.forEach((val, idx) => {
+        obj[headers[idx].trim()] = val.trim();
+      });
+      return obj;
     });
-    return row;
-  });
+  } catch (error) {
+    console.error('Error loading CSV:', error);
+  }
 }
 
-// Save LRN from lrn.html
-function saveLRN() {
-  const lrnInput = document.getElementById("lrnInput").value.trim();
-  localStorage.setItem("studentLRN", lrnInput);
-
-  const student = studentData.find(s => s.LRN === lrnInput);
-  if (student) {
-    localStorage.setItem("studentName", student.Name);
-  } else {
-    alert("LRN not found.");
-    return;
-  }
-
-  window.location.href = "student.html";
+// Used in student.html to display student name
+async function showStudentName() {
+  await loadCSV();
+  const lrn = localStorage.getItem('studentLRN');
+  const student = studentData.find(row => row.LRN === lrn);
+  document.getElementById('studentName').textContent = student ? student.Name : "Not Found";
 }
 
-// Save selection from student.html
-function submitStudentForm() {
-  const schoolYear = document.getElementById("schoolYear").value;
-  const grade = document.getElementById("gradeLevel").value;
-  const period = document.getElementById("assessmentType").value;
+// Used in results.html to show numeracy level
+async function displayResults() {
+  await loadCSV();
+  const lrn = localStorage.getItem('studentLRN');
+  const grade = localStorage.getItem('selectedGrade');
+  const period = localStorage.getItem('selectedPeriod');
+  const year = localStorage.getItem('selectedYear');
 
-  if (!schoolYear || !grade || !period) {
-    alert("Please fill out all fields.");
-    return;
-  }
+  const match = studentData.find(row =>
+    row.LRN === lrn &&
+    row.Grade === grade &&
+    row.Assessment === period &&
+    row.SchoolYear === year
+  );
 
-  localStorage.setItem("selectedYear", schoolYear);
-  localStorage.setItem("selectedGrade", grade);
-  localStorage.setItem("selectedPeriod", period);
-
-  window.location.href = "results.html";
+  const resultsBox = document.getElementById('resultsBox');
+  resultsBox.innerHTML = match
+    ? `<h3>Numeracy Level: ${match.Numeracy}</h3>`
+    : `<h3 style="color:red;">No data found for the given selection.</h3>`;
 }
