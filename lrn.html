@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | Numeracy Level Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo1.png" alt="Logo 1" class="logo">
+                <img src="logo2.png" alt="Logo 2" class="logo">
+                <img src="logo3.png" alt="Logo 3" class="logo">
+                <img src="logo4.png" alt="Logo 4" class="logo">
+            </div>
+            <h1 class="school-name">Antipolo City National Science And Technology High School</h1>
+        </div>
+
+        <h2>Student Access: Enter Your LRN</h2>
+        
+        <form id="lrnForm">
+            <input type="text" id="lrn" name="lrn" placeholder="Enter your LRN" required>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('lrnForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const lrn = document.getElementById('lrn').value.trim();
+            if (lrn === '') {
+                alert('Please enter a valid LRN.');
+                return;
+            }
+            localStorage.setItem('studentLRN', lrn);
+            window.location.href = 'student.html';
+        });
+    </script>
+</body>
+</html>
