@@ -3,84 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Numeracy Assessment Results</title>
-  <link rel="stylesheet" href="style1.css" />
+  <title>Results</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    .back-button {
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f0f4f8;
+    }
+    .results-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .go-back {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
-      background-color: #4caf50;
+      bottom: 20px;
+      right: 20px;
+      background: #007bff;
       color: white;
       border: none;
-      border-radius: 8px;
+      padding: 12px 18px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
-
-    .back-button:hover {
-      background-color: #388e3c;
+    .go-back:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="logo4.png" alt="School Logo" />
-    </div>
-
-    <div class="certificate-header">
-      <h4>ANTIPOLO CITY NATIONAL SCIENCE AND TECHNOLOGY HIGH SCHOOL</h4>
-    </div>
-
-    <h1 class="certificate-title">Certificate of Recognition</h1>
-
-    <p class="presented-to">is presented to</p>
-    <h2 id="studentName">(Student Name)</h2>
-
-    <p class="description">
-      for being classified as a/an 
-      <strong><span id="numeracyStatus">NUMERACY LEVEL</span></strong><br>
-      during the <strong><span id="assessmentPeriod">ASSESSMENT PERIOD</span></strong> of the 
-      <strong><span id="schoolYear">SCHOOL YEAR</span></strong> in 
-      <strong><span id="gradeLevel">GRADE</span></strong> at 
-      Antipolo City National Science and Technology High School.
-    </p>
+  <div class="results-box" id="resultsBox">
+    <p>Loading results...</p>
   </div>
 
-  <button class="back-button" onclick="goBack()">Go Back</button>
+  <button class="go-back" onclick="window.location.href='student.html'">Go Back</button>
 
   <script src="script.js"></script>
   <script>
-    async function showResult() {
+    async function displayResults() {
       await loadCSV();
 
       const lrn = localStorage.getItem('studentLRN');
-      const year = localStorage.getItem('selectedYear');
       const grade = localStorage.getItem('selectedGrade');
       const period = localStorage.getItem('selectedPeriod');
+      const year = localStorage.getItem('selectedYear');
 
-      const student = studentData.find(s =>
-        s.LRN === lrn &&
-        s.Grade === grade &&
-        s.Assessment === period &&
-        s.SchoolYear === year
+      const match = studentData.find(row =>
+        row.LRN === lrn &&
+        row.Grade === grade &&
+        row.Assessment === period &&
+        row.SchoolYear === year
       );
 
-      document.getElementById('studentName').textContent = student?.Name || 'Student not found';
-      document.getElementById('numeracyStatus').textContent = student?.Numeracy || 'N/A';
-      document.getElementById('assessmentPeriod').textContent = period === 'BOSY' ? 'Beginning of School Year' : 'End of School Year';
-      document.getElementById('schoolYear').textContent = year;
-      document.getElementById('gradeLevel').textContent = grade;
+      const resultsBox = document.getElementById('resultsBox');
+      resultsBox.innerHTML = match
+        ? `<h2>Numeracy Level</h2><p><strong>${match.Numeracy}</strong></p>`
+        : `<h3 style="color:red;">No data found for the given selection.</h3>`;
     }
 
-    function goBack() {
-      window.location.href = 'student.html';
-    }
-
-    showResult();
+    displayResults();
   </script>
 </body>
 </html>
